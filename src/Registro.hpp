@@ -13,8 +13,7 @@ private:
     string simbolo;
     vector<string> tipo;
     int cantidadSimbolos;
-    vector<pair<int, int>> posicion;//El primero es la linea, el segundo la columna
-
+    vector<pair<int, int>> posiciones; //El primero es la linea, el segundo la columna
 public:
     Registro(string nombre, string simbolo, vector<string> tipo)
     {
@@ -22,12 +21,15 @@ public:
         this->simbolo = simbolo;
         this->tipo = tipo;
     }
-    Registro(string nombre, string simbolo, vector<string> tipo, vector<pair<int, int>> posicion)
+    Registro(const Registro &origen)
     {
-        this->nombre = nombre;
-        this->simbolo = simbolo;
-        this->tipo = tipo;
-        this->posicion = posicion;
+        this->nombre = origen.nombre;
+        this->simbolo = origen.simbolo;
+        this->tipo = origen.tipo;
+    }
+    void setNuevaPosicion(pair<int,int> posicion){
+        posiciones.push_back(posicion);
+        cantidadSimbolos=posiciones.size();
     }
     string getNombre()
     {

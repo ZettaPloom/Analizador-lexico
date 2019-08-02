@@ -1,3 +1,5 @@
+#ifndef Analizador_H
+#define Analizador_H
 #include <vector>
 #include <fstream>
 #include <string>
@@ -29,13 +31,11 @@ Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
 
 void Analizador::identificarSimbolos(string rutaCodigo)
 {
+    vector<Registro> tbSimbolos;
     char caracter;
     string cadena("");
-    int indexSeparadores=0;
-    int indexSimbolos=0;
-    Registro* r;
-    pair<int,int> p;//El primero es la linea, el segundo la columna
-    vector<pair<int,int>>;
+    int index=0;
+    //pair<int,int> p;//El primero es la linea, el segundo la columna
     ifstream archivo(rutaCodigo);
     if (archivo.fail())
         cout << "Error al abrir el archivo de código" << endl;
@@ -49,30 +49,48 @@ void Analizador::identificarSimbolos(string rutaCodigo)
             else{
                 cout << caracter;
                 if(esSeparador(caracter)){
-                    r=&tablaSeparadores.at(indexSeparadores);
-                    while (r->getSimbolo().c_str().compare(caracter)==0)
-                        indexSeparadores++;
-                    
+                    Registro r=tablaSeparadores.at(index);
+                    while (index<tablaSeparadores.size()&&*r.getSimbolo().c_str()!=caracter)
+                    {
+                        index++;
+                        r=tablaSeparadores.at(index);
+                    }
+                    tbSimbolos.push_back(r);
+                    index=0;
                 }else{
                     cadena+=caracter;
+                    Registro r=tablaSimbolos.at(index);
+                    while (index<tablaSimbolos.size()&&r.getSimbolo()!=cadena)
+                    {
+                        index++;
+                        r=tablaSeparadores.at(index);//Aqui hay un error, se accede a un index por fuera del arreglo
+                    }
+                    tbSimbolos.push_back(r);
+                    index=0;
                 }
             }
             archivo.get(caracter);
         }
         archivo.close();
     }
+    for (int i = 0; i < tbSimbolos.size(); i++)
+    {
+        tbSimbolos.at(i).toString();
+    }
+    
 }
 
 bool Analizador::esSeparador(char simbolo)
 {
     bool encontrado=false;
     int i=0;
-    while (!encontrado)
+    while (i<tablaSeparadores.size()&&!encontrado)
     {
-        if(tablaSeparadores.at(i).getSimbolo().c_str()==simbolo)
+        if(*tablaSeparadores.at(i).getSimbolo().c_str()==simbolo)
             encontrado=true;
         else
             i++;        
     }
     return encontrado;
 }
+#endif
