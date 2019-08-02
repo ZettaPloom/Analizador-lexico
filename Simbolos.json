@@ -1,0 +1,337 @@
+{
+    "Simbolos": [
+        {
+            "Nombre":"Real",
+            "Simbolo":"real",
+            "Tipo":[
+                "Tipo de dato",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Entero",
+            "Simbolo":"entero",
+            "Tipo":[
+                "Tipo de dato",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Logico",
+            "Simbolo":"logico",
+            "Tipo":[
+                "Tipo de dato",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Caracter",
+            "Simbolo":"caracter",
+            "Tipo":[
+                "Tipo de dato",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Cadena",
+            "Simbolo":"cadena",
+            "Tipo":[
+                "Tipo de dato",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Algoritmo",
+            "Simbolo":"Algoritmo",
+            "Tipo":[
+                "Identificador",
+                "Palabra reservada",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Definir",
+            "Simbolo":"definir",
+            "Tipo":[
+                "Identificador",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Verdadero",
+            "Simbolo":"verdadero",
+            "Tipo":[
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Falso",
+            "Simbolo":"falso",
+            "Tipo":[
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"FinAlgoritmo",
+            "Simbolo":"finAlgoritmo",
+            "Tipo":[
+                "Identificador",
+                "Palabra reservada",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Como",
+            "Simbolo":"como",
+            "Tipo":[
+                "Identificador",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Escribir",
+            "Simbolo":"escribir",
+            "Tipo":[
+                "Identificador",
+                "Palabra reservada",
+                "Funcion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Leer",
+            "Simbolo":"leer",
+            "Tipo":[
+                "Identificador",
+                "Palabra reservada",
+                "Funcion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Para",
+            "Simbolo":"para",
+            "Tipo":[
+                "Palabra reservada",
+                "Ciclo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Hasta",
+            "Simbolo":"hasta",
+            "Tipo":[
+                "Palabra reservada",
+                "Expresion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Paso",
+            "Simbolo":"paso",
+            "Tipo":[
+                "Palabra reservada",
+                "Expresion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Hacer",
+            "Simbolo":"hacer",
+            "Tipo":[
+                "Palabra reservada",
+                "Expresion",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"FinPara",
+            "Simbolo":"finPara",
+            "Tipo":[
+                "Palabra reservada",
+                "Ciclo",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Mientras",
+            "Simbolo":"mientras",
+            "Tipo":[
+                "Palabra reservada",
+                "Ciclo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"FinMientras",
+            "Simbolo":"finMientras",
+            "Tipo":[
+                "Palabra reservada",
+                "Ciclo",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Si",
+            "Simbolo":"si",
+            "Tipo":[
+                "Palabra reservada",
+                "Condicional",
+                "Expresion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Entonces",
+            "Simbolo":"entonces",
+            "Tipo":[
+                "Palabra reservada",
+                "Expresion",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"FinSi",
+            "Simbolo":"finSi",
+            "Tipo":[
+                "Palabra reservada",
+                "Condicional",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Sino",
+            "Simbolo":"sino",
+            "Tipo":[
+                "Palabra reservada",
+                "Condicional",
+                "Expresion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Segun",
+            "Simbolo":"segun",
+            "Tipo":[
+                "Palabra reservada",
+                "Condicional",
+                "Expresion"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"FinSegun",
+            "Simbolo":"finSegun",
+            "Tipo":[
+                "Palabra reservada",
+                "Condicional",
+                "Bloque de codigo"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Comentarios",
+            "Simbolo":"//",
+            "Tipo":[
+                "Comentarios"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Nombre":"Operador suma",
+            "Simbolo":"+",
+            "Tipo":[
+                "Separador",
+                "Operador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Operador resta",
+            "Simbolo":"-",
+            "Tipo":[
+                "Separador",
+                "Operador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Operador division",
+            "Simbolo":"/",
+            "Tipo":[
+                "Separador",
+                "Operador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Operador modulo",
+            "Simbolo":"%",
+            "Tipo":[
+                "Separador",
+                "Operador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Operador multiplicacion",
+            "Simbolo":"*",
+            "Tipo":[
+                "Separador",
+                "Operador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Espacio",
+            "Simbolo":" ",
+            "Tipo":[
+                "Separador",
+                "Operador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Indicador de texto",
+            "Simbolo":"\"",
+            "Tipo":[
+                "Identificador",
+                "Separador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        },
+        {
+            "Nombre":"Indicador de caracter",
+            "Simbolo":"'",
+            "Tipo":[
+                "Identificador",
+                "Separador",
+                "Expresion"
+            ],
+            "EsSeparador":true
+        }
+    ]
+}
