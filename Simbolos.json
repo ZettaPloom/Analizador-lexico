@@ -247,7 +247,7 @@
         },
         {
             "Nombre":"Comentarios",
-            "Simbolo":"//",
+            "Simbolo":"/",
             "Tipo":[
                 "Comentarios"
             ],
@@ -307,6 +307,7 @@
             "Nombre":"Espacio",
             "Simbolo":" ",
             "Tipo":[
+                "Token",
                 "Separador",
                 "Operador",
                 "Expresion"
@@ -314,21 +315,12 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Indicador de texto",
-            "Simbolo":"\"",
-            "Tipo":[
-                "Identificador",
-                "Separador",
-                "Expresion"
-            ],
-            "EsSeparador":true
-        },
-        {
             "Nombre":"Indicador de salto de linea",
-            "Simbolo":"\n",
+            "Simbolo":";",
             "Tipo":[
                 "Separador"
-            ]
+            ],
+            "EsSeparador":true
         },
         {
             "Nombre":"Indicador de caracter",

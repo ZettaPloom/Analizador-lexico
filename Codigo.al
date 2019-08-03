@@ -1,5 +1,5 @@
-Algoritmo
-    definir a como cadena
-    leer a
-    escribir a
-finAlgoritmo
+Algoritmo;
+definir a como cadena;
+leer a;
+escribir a;
+finAlgoritmo;

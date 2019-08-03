@@ -56,8 +56,9 @@ vector<Registro> Tabla::setTablas(string ruta, bool leerSeparadores)
                 }
                 Registro r(campos[i]["Nombre"].asString(), campos[i]["Simbolo"].asString(), tipos);
                 tb.push_back(r);
+                tipos.clear();
             }
-            else if(!leerSeparadores)
+            else if(!campos[i]["EsSeparador"].asBool()&&!leerSeparadores)
             {
                 for (int k = 0; k < camposTipos.size(); k++)
                 {
@@ -65,6 +66,7 @@ vector<Registro> Tabla::setTablas(string ruta, bool leerSeparadores)
                 }
                 Registro r(campos[i]["Nombre"].asString(), campos[i]["Simbolo"].asString(), tipos);
                 tb.push_back(r);
+                tipos.clear();
             }
         }
     }

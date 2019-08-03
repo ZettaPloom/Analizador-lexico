@@ -52,10 +52,11 @@ public:
         // tipos.push_back(p);
         cout << nombre << "\t" << simbolo << "\t";
         for (int i = 0; i < tipo.size(); i++)
-        {
             cout << tipo.at(i) << "\t";
-        }
-        cout << endl;
+        if(!posiciones.empty())
+            for (int i = 0; i < posiciones.size(); i++)
+                cout<<posiciones.at(i).first<<"\t"<<posiciones.at(i).second;
+        cout<<cantidadSimbolos<<endl;  
     }
 };
 #endif
