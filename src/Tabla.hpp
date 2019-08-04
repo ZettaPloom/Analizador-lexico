@@ -93,7 +93,7 @@ void Tabla::toString(vector<Registro> r)
     t.add("Simbolo");
     t.add("Tipos");
     t.endOfRow();
-    if (!r.at(5).getPosiciones().empty())
+    if (r.at(1).getCantidadSimbolos()!=0)
     {
         t.add("Cantidad de simbolos");
         t.add("Posicion de cada simbolo");
@@ -109,13 +109,7 @@ void Tabla::toString(vector<Registro> r)
             t.add(tipo);
             string cantidad = r.at(i).getCantidadSimbolos()+"";
             t.add(cantidad);
-            string posiciones = "";
-            for (int j = 0; j < r.at(i).getPosiciones().size(); j++)
-            {
-                posiciones += r.at(i).getPosiciones().at(j).getFila() + ", " + r.at(i).getPosiciones().at(j).getColumna();
-                posiciones += "; ";
-            }
-            t.add(posiciones);
+            t.add(r.at(i).getPosiciones());
             t.endOfRow();
         }
     }
