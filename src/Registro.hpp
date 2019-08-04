@@ -43,20 +43,13 @@ public:
     {
         return this->tipo;
     }
-    void toString()
+    int getCantidadSimbolos()
     {
-        // vector<pair<int,int>> tipos;
-        // pair<int,int> p;
-        // p.first=1;
-        // p.second=1;
-        // tipos.push_back(p);
-        cout << nombre << "\t" << simbolo << "\t";
-        for (int i = 0; i < tipo.size(); i++)
-            cout << tipo.at(i) << "\t";
-        if(!posiciones.empty())
-            for (int i = 0; i < posiciones.size(); i++)
-                cout<<posiciones.at(i).first<<"\t"<<posiciones.at(i).second;
-        cout<<cantidadSimbolos<<endl;  
+        return this->cantidadSimbolos;
+    }
+    vector<pair<int,int>> getPosiciones()
+    {
+        return this->posiciones;
     }
 };
 #endif

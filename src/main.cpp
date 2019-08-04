@@ -17,7 +17,9 @@ int main()
 	// 	separadores.at(i).toString();
 	// }
 	Analizador an("Simbolos.json","Codigo.al");
-	an.imprimirSimbolosEncontrados();
+	Tabla::toString(an.getSimbolos());
+	// Tabla tb("Simbolos.json");
+	// Tabla::toString(tb.getTablaSeparadores());
 	// vector<Registro> separadores = an.tablaSeparadores;
 	// for (int i = 0; i < separadores.size(); i++)
 	// {
