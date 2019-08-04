@@ -17,6 +17,7 @@ int main()
 	// 	separadores.at(i).toString();
 	// }
 	Analizador an("Simbolos.json","Codigo.al");
+	Tabla::toString(an.getTablaSeparadores());
 	Tabla::toString(an.getSimbolos());
 	// Tabla tb("Simbolos.json");
 	// Tabla::toString(tb.getTablaSeparadores());

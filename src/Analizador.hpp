@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-#include <utility>
 #include "Registro.hpp"
 #include "Tabla.hpp"
 using namespace std;
@@ -21,8 +20,8 @@ public:
     void identificarSimbolos(string rutaCodigo);
     bool esSeparador(char simbolo, int fila, int columna);
     bool yaExiste(string simbolo, int fila, int columna);
-    void agregarPosicionActual(string simbolo, int fila, int columna);
     void buscarAgregarSimbolo(string simbolo, int fila, int columna);
+    void buscarAgregarSeparador(string simbolo, int fila, int columna);
     vector<Registro> getSimbolos();
     vector<Registro> getTablaSimbolos();
     vector<Registro> getTablaSeparadores();
@@ -182,7 +181,7 @@ void Analizador::identificarSimbolos(string rutaCodigo)
     {
         string cadena;
         string simbolo = "";
-        char caracter;
+        string caracter = "";
         int fila = 0;
         while (!archivo.eof())
         {
@@ -192,10 +191,10 @@ void Analizador::identificarSimbolos(string rutaCodigo)
             {
                 if (esSeparador(cadena.at(i), fila, i))
                 {
-                    if (!yaExiste(simbolo, fila, i))
-                        buscarAgregarSimbolo(simbolo, fila, i);
-                    else
-                        agregarPosicionActual(simbolo, fila, i);
+                    caracter = cadena.at(i);
+                    buscarAgregarSeparador(caracter, fila, i);
+                    buscarAgregarSimbolo(simbolo, fila, i);
+                    caracter = "";
                     simbolo = "";
                 }
                 else
@@ -209,24 +208,42 @@ void Analizador::identificarSimbolos(string rutaCodigo)
 void Analizador::buscarAgregarSimbolo(string simbolo, int fila, int columna)
 {
     int i = 0;
-    while (i < tablaSimbolos.size() && tablaSimbolos.at(i).getSimbolo() != simbolo)
-        i++;
-    if (i < tablaSimbolos.size())
+    if (!yaExiste(simbolo, fila, columna))
     {
-        Registro r = tablaSimbolos.at(i);
-        pair<int, int> p(fila, columna);
-        simbolos.push_back(r);
-        simbolos.back().setNuevaPosicion(p);
+        while (i < tablaSimbolos.size() && tablaSimbolos.at(i).getSimbolo().compare(simbolo) != 0)
+            i++;
+        if (i < tablaSimbolos.size())
+        {
+            Registro r = tablaSimbolos.at(i);
+            r.setNuevaPosicion(fila, columna);
+            simbolos.push_back(r);
+        }
+        else
+        {
+            vector<string> v;
+            v.push_back("Identificador");
+            v.push_back("Variable");
+            Registro r("Variable", simbolo, v);
+            r.setNuevaPosicion(fila, columna);
+            simbolos.push_back(r);
+        }
     }
-    else
+}
+
+void Analizador::buscarAgregarSeparador(string simbolo, int fila, int columna)
+{
+    int i = 0;
+    if (!yaExiste(simbolo, fila, columna))
     {
-        vector<string> v;
-        v.push_back("Identificador");
-        v.push_back("Variable");
-        Registro r("Variable", simbolo, v);
-        pair<int, int> p(fila, columna);
-        simbolos.push_back(r);
-        simbolos.back().setNuevaPosicion(p);
+        while (i < tablaSeparadores.size() && tablaSeparadores.at(i).getSimbolo().compare(simbolo) != 0)
+            // cout << tablaSeparadores.at(i).getSimbolo() << " " << tablaSeparadores.at(i).getSimbolo().compare(simbolo) << endl;
+            i++;
+        if (i < tablaSeparadores.size())
+        {
+            Registro r = tablaSeparadores.at(i);
+            r.setNuevaPosicion(fila, columna);
+            simbolos.push_back(r);
+        }
     }
 }
 
@@ -251,30 +268,10 @@ bool Analizador::esSeparador(char simbolo, int fila, int columna)
     int i = 0;
     while (i < tablaSeparadores.size() && !encontrado)
         if (*tablaSeparadores.at(i).getSimbolo().c_str() == simbolo)
-        {
             encontrado = true;
-            if (!yaExiste(to_string(simbolo), fila, columna))
-            {
-                Registro r = tablaSeparadores.at(i);
-                pair<int, int> p(fila, columna);
-                simbolos.push_back(tablaSeparadores.at(i));
-                simbolos.back().setNuevaPosicion(p);
-            }
-            else
-                agregarPosicionActual(to_string(simbolo), fila, columna);
-        }
         else
             i++;
     return encontrado;
-}
-
-void Analizador::agregarPosicionActual(string simbolo, int fila, int columna)
-{
-    int i = 0;
-    while (i < simbolos.size() && simbolos.at(i).getSimbolo() != simbolo)
-        i++;
-    pair<int, int> p(fila, columna);
-    simbolos.at(i).setNuevaPosicion(p);
 }
 
 bool Analizador::yaExiste(string simbolo, int fila, int columna)
@@ -282,8 +279,11 @@ bool Analizador::yaExiste(string simbolo, int fila, int columna)
     bool existe = false;
     int i = 0;
     while (i < simbolos.size() && !existe)
-        if (simbolos.at(i).getSimbolo() == simbolo)
+        if (simbolos.at(i).getSimbolo().compare(simbolo) == 0)
+        {
             existe = true;
+            simbolos.at(i).setNuevaPosicion(fila, columna);
+        }
         else
             i++;
     return existe;

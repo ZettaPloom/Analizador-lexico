@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <utility>
+#include "Posicion.hpp"
 using namespace std;
 
 class Registro
@@ -12,8 +12,9 @@ private:
     string nombre;
     string simbolo;
     vector<string> tipo;
-    int cantidadSimbolos;
-    vector<pair<int, int>> posiciones; //El primero es la linea, el segundo la columna
+    vector<Posicion> posiciones; //El primero es la linea, el segundo la columna
+    int cantidadSimbolos = posiciones.size();
+
 public:
     Registro(string nombre, string simbolo, vector<string> tipo)
     {
@@ -27,9 +28,11 @@ public:
         this->simbolo = origen.simbolo;
         this->tipo = origen.tipo;
     }
-    void setNuevaPosicion(pair<int,int> posicion){
-        posiciones.push_back(posicion);
-        cantidadSimbolos=posiciones.size();
+    void setNuevaPosicion(int fila, int columna)
+    {
+        Posicion p(fila,columna);
+        posiciones.push_back(p);
+        cantidadSimbolos = posiciones.size();
     }
     string getNombre()
     {
@@ -47,7 +50,7 @@ public:
     {
         return this->cantidadSimbolos;
     }
-    vector<pair<int,int>> getPosiciones()
+    vector<Posicion> getPosiciones()
     {
         return this->posiciones;
     }
