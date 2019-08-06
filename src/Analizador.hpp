@@ -18,10 +18,10 @@ private:
 public:
     Analizador(string rutaSimbolos, string rutaCodigo);
     void identificarSimbolos(string rutaCodigo);
-    bool esSeparador(char simbolo, int fila, int columna);
-    bool yaExiste(string simbolo, int fila, int columna);
-    void buscarAgregarSimbolo(string simbolo, int fila, int columna);
-    void buscarAgregarSeparador(string simbolo, int fila, int columna);
+    bool esSeparador(char simbolo);
+    bool yaExiste(string simbolo, string fila, string columna);
+    void buscarAgregarSimbolo(string simbolo, string fila, string columna);
+    void buscarAgregarSeparador(string simbolo, string fila, string columna);
     vector<Registro> getSimbolos();
     vector<Registro> getTablaSimbolos();
     vector<Registro> getTablaSeparadores();
@@ -46,17 +46,19 @@ void Analizador::identificarSimbolos(string rutaCodigo)
         string simbolo = "";
         string caracter = "";
         int fila = 0;
+        int columna = 0;
         while (!archivo.eof())
         {
             fila++;
             getline(archivo, cadena);
             for (int i = 0; i < cadena.size(); i++) //el contador (i) de este ciclo es la posicion columna en el archivo
             {
-                if (esSeparador(cadena.at(i), fila, i))
+                if (esSeparador(cadena.at(i)))
                 {
+                    columna = i + 1;
                     caracter = cadena.at(i);
-                    buscarAgregarSeparador(caracter, fila, i);
-                    buscarAgregarSimbolo(simbolo, fila, i);
+                    buscarAgregarSeparador(caracter, to_string(fila), to_string(columna));
+                    buscarAgregarSimbolo(simbolo, to_string(fila), to_string(columna));
                     caracter = "";
                     simbolo = "";
                 }
@@ -68,7 +70,7 @@ void Analizador::identificarSimbolos(string rutaCodigo)
     }
 }
 
-void Analizador::buscarAgregarSimbolo(string simbolo, int fila, int columna)
+void Analizador::buscarAgregarSimbolo(string simbolo, string fila, string columna)
 {
     int i = 0;
     if (!yaExiste(simbolo, fila, columna))
@@ -77,9 +79,9 @@ void Analizador::buscarAgregarSimbolo(string simbolo, int fila, int columna)
             i++;
         if (i < tablaSimbolos.size())
         {
-            Registro* r = &tablaSimbolos.at(i);
-            r->setNuevaPosicion(fila, columna);
-            simbolos.push_back(*r);
+            Registro r = tablaSimbolos.at(i);
+            simbolos.push_back(r);
+            simbolos.back().setNuevaPosicion(fila, columna);
         }
         else
         {
@@ -87,13 +89,13 @@ void Analizador::buscarAgregarSimbolo(string simbolo, int fila, int columna)
             v.push_back("Identificador");
             v.push_back("Variable");
             Registro r("Variable", simbolo, v);
-            r.setNuevaPosicion(fila, columna);
             simbolos.push_back(r);
+            simbolos.back().setNuevaPosicion(fila, columna);
         }
     }
 }
 
-void Analizador::buscarAgregarSeparador(string simbolo, int fila, int columna)
+void Analizador::buscarAgregarSeparador(string simbolo, string fila, string columna)
 {
     int i = 0;
     if (!yaExiste(simbolo, fila, columna))
@@ -103,9 +105,9 @@ void Analizador::buscarAgregarSeparador(string simbolo, int fila, int columna)
             i++;
         if (i < tablaSeparadores.size())
         {
-            Registro* r = &tablaSeparadores.at(i);
-            r->setNuevaPosicion(fila, columna);
-            simbolos.push_back(*r);
+            Registro r = tablaSeparadores.at(i);
+            simbolos.push_back(r);
+            simbolos.back().setNuevaPosicion(fila, columna);
         }
     }
 }
@@ -125,7 +127,7 @@ vector<Registro> Analizador::getTablaSeparadores()
     return this->tablaSeparadores;
 }
 
-bool Analizador::esSeparador(char simbolo, int fila, int columna)
+bool Analizador::esSeparador(char simbolo)
 {
     bool encontrado = false;
     int i = 0;
@@ -137,7 +139,7 @@ bool Analizador::esSeparador(char simbolo, int fila, int columna)
     return encontrado;
 }
 
-bool Analizador::yaExiste(string simbolo, int fila, int columna)
+bool Analizador::yaExiste(string simbolo, string fila, string columna)
 {
     bool existe = false;
     int i = 0;

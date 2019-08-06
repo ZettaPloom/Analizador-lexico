@@ -14,7 +14,6 @@ class Tabla
 private:
     vector<Registro> tablaSimbolos;
     vector<Registro> tablaSeparadores;
-
 public:
     Tabla(string ruta);
     vector<Registro> setTablas(string ruta, bool leerSeparadores); //true es Separadores, false es Simbolos
@@ -92,11 +91,11 @@ void Tabla::toString(vector<Registro> r)
     t.add("Nombre del simbolo");
     t.add("Simbolo");
     t.add("Tipos");
-    t.endOfRow();
-    if (r.at(1).getCantidadSimbolos()!=0)
+    if (r.at(0).getCantidadSimbolos()!=0)
     {
         t.add("Cantidad de simbolos");
-        t.add("Posicion de cada simbolo");
+        t.add("Posicion de cada simbolo(Linea-Columna)");
+        t.endOfRow();
         for (int i = 0; i < r.size(); i++)
         {
             t.add(r.at(i).getNombre());
@@ -107,14 +106,14 @@ void Tabla::toString(vector<Registro> r)
                 tipo += r.at(i).getTipo().at(j) + ", ";
             }
             t.add(tipo);
-            string cantidad = r.at(i).getCantidadSimbolos()+"";
-            t.add(cantidad);
+            t.add(to_string(r.at(i).getCantidadSimbolos()));
             t.add(r.at(i).getPosiciones());
             t.endOfRow();
         }
     }
     else
     {
+        t.endOfRow();
         for (int i = 0; i < r.size(); i++)
         {
             t.add(r.at(i).getNombre());

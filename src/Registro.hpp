@@ -11,9 +11,9 @@ private:
     string nombre;
     string simbolo;
     vector<string> tipo;
-    vector<int> filas; //El primero es la linea, el segundo la columna
-    vector<int> columnas;
-    int cantidadSimbolos = filas.size();
+    vector<string> filas; //El primero es la linea, el segundo la columna
+    vector<string> columnas;
+    int cantidadSimbolos;
 
 public:
     Registro(string nombre, string simbolo, vector<string> tipo)
@@ -21,18 +21,22 @@ public:
         this->nombre = nombre;
         this->simbolo = simbolo;
         this->tipo = tipo;
+        cantidadSimbolos = 0;
     }
     Registro(const Registro &origen)
     {
         this->nombre = origen.nombre;
         this->simbolo = origen.simbolo;
         this->tipo = origen.tipo;
+        this->cantidadSimbolos = origen.cantidadSimbolos;
+        this->filas = origen.filas;
+        this->columnas = origen.columnas;
     }
-    void setNuevaPosicion(int fila, int columna)
+    void setNuevaPosicion(string fila, string columna)
     {
         this->filas.push_back(fila);
         this->columnas.push_back(columna);
-        cantidadSimbolos = filas.size();
+        this->cantidadSimbolos++;
     }
     string getNombre()
     {
@@ -55,8 +59,7 @@ public:
         string result = "";
         for (int i = 0; i < filas.size(); i++)
         {
-            result += filas.at(i) + ", " + columnas.at(i);
-            result += "; ";
+            result += this->filas.at(i) + "-" + this->columnas.at(i) + "; ";
         }
         return result;
     }

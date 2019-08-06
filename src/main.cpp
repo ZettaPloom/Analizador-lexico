@@ -25,21 +25,36 @@ Y agregar el siguiente parametro de compilacion en gcc: -ljsoncpp
 
 int main()
 {
-	// Tabla simbolos("Simbolos.json");
-	// vector<Registro> separadores = simbolos.getTablaSimbolos();
-	// for (int i = 0; i < separadores.size(); i++)
-	// {
-	// 	separadores.at(i).toString();
-	// }
-	Analizador an("Simbolos.json","Codigo.al");
-	Tabla::toString(an.getTablaSeparadores());
-	Tabla::toString(an.getSimbolos());
-	// Tabla tb("Simbolos.json");
-	// Tabla::toString(tb.getTablaSeparadores());
-	// vector<Registro> separadores = an.tablaSeparadores;
-	// for (int i = 0; i < separadores.size(); i++)
-	// {
-	// 	separadores.at(i).toString();
-	// }
-	return 0;
+    string rutaSimbolos, rutaCodigo;
+    cout << "\nPor favor ingrese la ruta del archivo JSON de la tabla de simbolos" << endl;
+    cin >> rutaSimbolos;
+    cout << "\nPor favor ingrese la ruta del archivo que contiene el código" << endl;
+    cin >> rutaCodigo;
+    Analizador an(rutaSimbolos, rutaCodigo);
+    int opciones;
+etiqueta:
+    cout << "\nPresione 1 para imprimir la tabla de simbolos" << endl
+         << "Presione 2 para imprimir la tabla de separadores" << endl
+         << "Presione 3 para imprimir el análisis léxico del código" <<endl
+         << "Presione cualquier otro número para salir" << endl;
+    cin >> opciones;
+    cout << endl;
+    switch (opciones)
+    {
+    case 1:
+        Tabla::toString(an.getTablaSimbolos());
+        goto etiqueta;
+        break;
+    case 2:
+        Tabla::toString(an.getTablaSeparadores());
+        goto etiqueta;
+        break;
+    case 3:
+        Tabla::toString(an.getSimbolos());
+        goto etiqueta;
+        break;
+    default:
+        break;
+    }
+    return 0;
 }
