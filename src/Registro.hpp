@@ -1,7 +1,6 @@
 #ifndef Registro_H
 #define Registro_H
 #include <string>
-#include <iostream>
 #include <vector>
 using namespace std;
 

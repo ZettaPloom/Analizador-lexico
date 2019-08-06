@@ -18,9 +18,7 @@ Para correr este programa instalar la libreria libjsoncpp-dev
 En Linux: sudo apt-get install libjsoncpp-dev
 Y agregar el siguiente parametro de compilacion en gcc: -ljsoncpp
 ****************************************************************** */
-#include <vector>
 #include "Tabla.hpp"
-#include "Registro.hpp"
 #include "Analizador.hpp"
 
 int main()

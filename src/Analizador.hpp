@@ -3,10 +3,8 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include <iostream>
 #include "Registro.hpp"
 #include "Tabla.hpp"
-using namespace std;
 
 class Analizador
 {

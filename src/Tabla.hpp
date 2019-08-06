@@ -3,11 +3,9 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <iostream>
 #include <jsoncpp/json/json.h>
 #include "Registro.hpp"
 #include "TextTable.h"
-using namespace std;
 
 class Tabla
 {
