@@ -55,8 +55,8 @@ void Analizador::identificarSimbolos(string rutaCodigo)
                 {
                     columna = i + 1;
                     caracter = cadena.at(i);
+                    buscarAgregarSimbolo(simbolo, to_string(fila), to_string(columna-simbolo.size()));
                     buscarAgregarSeparador(caracter, to_string(fila), to_string(columna));
-                    buscarAgregarSimbolo(simbolo, to_string(fila), to_string(columna));
                     caracter = "";
                     simbolo = "";
                 }
