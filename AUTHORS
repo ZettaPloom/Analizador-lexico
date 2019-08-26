@@ -1,0 +1,10 @@
+Licensed under GPLv2 terms. See the LICENSE file for details
+That is the license for the whole package.
+
+Compilador uses some tools to build and deploy its applications, parts
+of the package are under other, compatible licenses:
+
+cpp-text-table:
+    Location: src/TextTable.h
+    License: GNU LGPL Version 2.1
+    Ḿade by: Yoav Kleinberger - May 2018
