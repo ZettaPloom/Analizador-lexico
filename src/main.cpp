@@ -33,7 +33,9 @@ int main()
 etiqueta:
     cout << "\nPresione 1 para imprimir la tabla de simbolos" << endl
          << "Presione 2 para imprimir la tabla de separadores" << endl
-         << "Presione 3 para imprimir el análisis léxico del código" <<endl
+         << "Presione 3 para imprimir la tabla de tokens" << endl
+         << "Presione 4 para imprimir la tabla de simbolos generada" << endl
+         << "Presione 5 para imprimir la tabla de tokens generada" << endl
          << "Presione cualquier otro número para salir" << endl;
     cin >> opciones;
     cout << endl;
@@ -48,7 +50,15 @@ etiqueta:
         goto etiqueta;
         break;
     case 3:
+        Tabla::toString(an.getTablaTokens());
+        goto etiqueta;
+        break;
+    case 4:
         Tabla::toString(an.getSimbolos());
+        goto etiqueta;
+        break;
+    case 5:
+        Tabla::toString(an.getTokens());
         goto etiqueta;
         break;
     default:

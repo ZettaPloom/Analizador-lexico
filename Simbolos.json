@@ -1,62 +1,59 @@
 {
     "Simbolos": [
         {
-            "Nombre":"Real",
+            "Token":"Tipo dato Real",
+            "IDToken":"1",
             "Simbolo":"real",
             "Tipo":[
-                "Tipo de dato",
+                "Tipo dato",
                 "Palabra reservada"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Entero",
+            "Token":"Tipo dato Entero",
+            "IDToken":"2",
             "Simbolo":"entero",
             "Tipo":[
-                "Tipo de dato",
+                "Tipo dato",
                 "Palabra reservada"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Logico",
+            "Token":"Tipo dato Logico",
+            "IDToken":"3",
             "Simbolo":"logico",
             "Tipo":[
-                "Tipo de dato",
+                "Tipo dato",
                 "Palabra reservada"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Caracter",
+            "Token":"Tipo dato Caracter",
+            "IDToken":"4",
             "Simbolo":"caracter",
             "Tipo":[
-                "Tipo de dato",
+                "Tipo dato",
                 "Palabra reservada"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Cadena",
-            "Simbolo":"cadena",
-            "Tipo":[
-                "Tipo de dato",
-                "Palabra reservada"
-            ],
-            "EsSeparador":false
-        },
-        {
-            "Nombre":"Algoritmo",
+            "Token":"Inicio bloque código",
+            "IDToken":"5",
             "Simbolo":"Algoritmo",
             "Tipo":[
                 "Identificador",
                 "Palabra reservada",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Definir",
+            "Token":"Definición variable",
+            "IDToken":"6",
             "Simbolo":"definir",
             "Tipo":[
                 "Identificador",
@@ -65,7 +62,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Verdadero",
+            "Token":"Valor lógico verdadero",
+            "IDToken":"7",
             "Simbolo":"verdadero",
             "Tipo":[
                 "Palabra reservada"
@@ -73,7 +71,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Falso",
+            "Token":"Valor lógico falso",
+            "IDToken":"8",
             "Simbolo":"falso",
             "Tipo":[
                 "Palabra reservada"
@@ -81,17 +80,19 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"FinAlgoritmo",
+            "Token":"Fin bloque código",
+            "IDToken":"9",
             "Simbolo":"finAlgoritmo",
             "Tipo":[
                 "Identificador",
                 "Palabra reservada",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Como",
+            "Token":"Tipo dato",
+            "IDToken":"10",
             "Simbolo":"como",
             "Tipo":[
                 "Identificador",
@@ -100,7 +101,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Escribir",
+            "Token":"Función escribir",
+            "IDToken":"11",
             "Simbolo":"escribir",
             "Tipo":[
                 "Identificador",
@@ -110,7 +112,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Leer",
+            "Token":"Función leer",
+            "IDToken":"12",
             "Simbolo":"leer",
             "Tipo":[
                 "Identificador",
@@ -120,7 +123,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Para",
+            "Token":"Ciclo for",
+            "IDToken":"13",
             "Simbolo":"para",
             "Tipo":[
                 "Palabra reservada",
@@ -129,7 +133,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Hasta",
+            "Token":"Fin ciclo for",
+            "IDToken":"14",
             "Simbolo":"hasta",
             "Tipo":[
                 "Palabra reservada",
@@ -138,7 +143,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Paso",
+            "Token":"Paso ciclo for ",
+            "IDToken":"15",
             "Simbolo":"paso",
             "Tipo":[
                 "Palabra reservada",
@@ -147,27 +153,30 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Hacer",
+            "Token":"Inicio bloque código for/while ",
+            "IDToken":"16",
             "Simbolo":"hacer",
             "Tipo":[
                 "Palabra reservada",
                 "Expresion",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"FinPara",
+            "Token":"Fin bloque código for",
+            "IDToken":"17",
             "Simbolo":"finPara",
             "Tipo":[
                 "Palabra reservada",
                 "Ciclo",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Mientras",
+            "Token":"Ciclo while",
+            "IDToken":"18",
             "Simbolo":"mientras",
             "Tipo":[
                 "Palabra reservada",
@@ -176,17 +185,19 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"FinMientras",
+            "Token":"Fin bloque código while",
+            "IDToken":"19",
             "Simbolo":"finMientras",
             "Tipo":[
                 "Palabra reservada",
                 "Ciclo",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Si",
+            "Token":"Condicional si",
+            "IDToken":"20",
             "Simbolo":"si",
             "Tipo":[
                 "Palabra reservada",
@@ -196,27 +207,30 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Entonces",
+            "Token":"Inicio bloque código si/segun",
+            "IDToken":"21",
             "Simbolo":"entonces",
             "Tipo":[
                 "Palabra reservada",
                 "Expresion",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"FinSi",
+            "Token":"Fin bloque código si",
+            "IDToken":"22",
             "Simbolo":"finSi",
             "Tipo":[
                 "Palabra reservada",
                 "Condicional",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Sino",
+            "Token":"Condicional sino",
+            "IDToken":"23",
             "Simbolo":"sino",
             "Tipo":[
                 "Palabra reservada",
@@ -226,7 +240,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Segun",
+            "Token":"Condicional segun",
+            "IDToken":"24",
             "Simbolo":"segun",
             "Tipo":[
                 "Palabra reservada",
@@ -236,17 +251,19 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"FinSegun",
+            "Token":"Fin bloque código segun",
+            "IDToken":"25",
             "Simbolo":"finSegun",
             "Tipo":[
                 "Palabra reservada",
                 "Condicional",
-                "Bloque de codigo"
+                "Bloque codigo"
             ],
             "EsSeparador":false
         },
         {
-            "Nombre":"Comentarios",
+            "Token":"Comentarios",
+            "IDToken":"26",
             "Simbolo":"/",
             "Tipo":[
                 "Comentarios"
@@ -254,7 +271,8 @@
             "EsSeparador":false
         },
         {
-            "Nombre":"Operador suma",
+            "Token":"Operador suma",
+            "IDToken":"27",
             "Simbolo":"+",
             "Tipo":[
                 "Separador",
@@ -264,7 +282,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Operador resta",
+            "Token":"Operador resta",
+            "IDToken":"28",
             "Simbolo":"-",
             "Tipo":[
                 "Separador",
@@ -274,7 +293,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Operador division",
+            "Token":"Operador division",
+            "IDToken":"29",
             "Simbolo":"/",
             "Tipo":[
                 "Separador",
@@ -284,7 +304,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Operador modulo",
+            "Token":"Operador modulo",
+            "IDToken":"30",
             "Simbolo":"%",
             "Tipo":[
                 "Separador",
@@ -294,7 +315,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Operador multiplicacion",
+            "Token":"Operador multiplicacion",
+            "IDToken":"31",
             "Simbolo":"*",
             "Tipo":[
                 "Separador",
@@ -304,7 +326,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Espacio",
+            "Token":"Espacio ",
+            "IDToken":"32",
             "Simbolo":" ",
             "Tipo":[
                 "Token",
@@ -315,7 +338,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Indicador de salto de linea",
+            "Token":"Salto linea",
+            "IDToken":"33",
             "Simbolo":";",
             "Tipo":[
                 "Separador"
@@ -323,7 +347,8 @@
             "EsSeparador":true
         },
         {
-            "Nombre":"Indicador de caracter",
+            "Token":"Caracter",
+            "IDToken":"34",
             "Simbolo":"'",
             "Tipo":[
                 "Identificador",
@@ -331,6 +356,35 @@
                 "Expresion"
             ],
             "EsSeparador":true
+        },
+        {
+            "Token":"Tipo dato cadena",
+            "IDToken":"35",
+            "Simbolo":"cadena",
+            "Tipo":[
+                "Tipo dato",
+                "Palabra reservada"
+            ],
+            "EsSeparador":false
+        },
+        {
+            "Token":"Tipo datoggggg",
+            "IDToken":"37",
+            "Simbolo":"martha",
+            "Tipo":[
+
+            ],
+            "EsSeparador":false
+
+        },
+        {
+            "Token":"Tipo datoeeeee",
+            "Simbolo":"jhon",
+            "IDToken":"38",
+            "Tipo":[
+
+            ],
+            "EsSeparador":false
         }
     ]
 }

@@ -7,24 +7,31 @@ using namespace std;
 class Registro
 {
 private:
-    string nombre;
+    string token;
     string simbolo;
     vector<string> tipo;
-    vector<string> filas; //El primero es la linea, el segundo la columna
+    vector<string> filas;
     vector<string> columnas;
     int cantidadSimbolos;
+    string IDToken;
 
 public:
-    Registro(string nombre, string simbolo, vector<string> tipo)
+    Registro(string simbolo, vector<string> tipo)
     {
-        this->nombre = nombre;
         this->simbolo = simbolo;
         this->tipo = tipo;
         cantidadSimbolos = 0;
     }
+    Registro(string token, string IDToken, string lexema)
+    {
+        this->token = token;
+        this->IDToken = IDToken;
+        this->simbolo = lexema;
+    }
     Registro(const Registro &origen)
     {
-        this->nombre = origen.nombre;
+        this->token = origen.token;
+        this->IDToken = origen.IDToken;
         this->simbolo = origen.simbolo;
         this->tipo = origen.tipo;
         this->cantidadSimbolos = origen.cantidadSimbolos;
@@ -37,13 +44,17 @@ public:
         this->columnas.push_back(columna);
         this->cantidadSimbolos++;
     }
-    string getNombre()
+    string getToken()
     {
-        return this->nombre;
+        return this->token;
     }
     string getSimbolo()
     {
         return this->simbolo;
+    }
+    string getIDToken()
+    {
+        return this->IDToken;
     }
     vector<string> getTipo()
     {

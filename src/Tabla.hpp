@@ -12,11 +12,14 @@ class Tabla
 private:
     vector<Registro> tablaSimbolos;
     vector<Registro> tablaSeparadores;
+    vector<Registro> tablaTokens;
+
 public:
     Tabla(string ruta);
     vector<Registro> setTablas(string ruta, bool leerSeparadores); //true es Separadores, false es Simbolos
     vector<Registro> getTablaSimbolos();
     vector<Registro> getTablaSeparadores();
+    vector<Registro> getTablaTokens();
     static void toString(vector<Registro> r);
 };
 
@@ -34,7 +37,7 @@ vector<Registro> Tabla::setTablas(string ruta, bool leerSeparadores)
     {
         vector<string> tipos;
         tipos.push_back("Error");
-        Registro r("Error", "Error", tipos);
+        Registro r("Error", tipos);
         tb.push_back(r);
         cout << "Error al abrir el archivo" << endl;
     }
@@ -54,7 +57,7 @@ vector<Registro> Tabla::setTablas(string ruta, bool leerSeparadores)
                 {
                     tipos.push_back(camposTipos[j].asString());
                 }
-                Registro r(campos[i]["Nombre"].asString(), campos[i]["Simbolo"].asString(), tipos);
+                Registro r(campos[i]["Simbolo"].asString(), tipos);
                 tb.push_back(r);
                 tipos.clear();
             }
@@ -64,10 +67,12 @@ vector<Registro> Tabla::setTablas(string ruta, bool leerSeparadores)
                 {
                     tipos.push_back(camposTipos[k].asString());
                 }
-                Registro r(campos[i]["Nombre"].asString(), campos[i]["Simbolo"].asString(), tipos);
+                Registro r(campos[i]["Simbolo"].asString(), tipos);
                 tb.push_back(r);
                 tipos.clear();
             }
+            Registro t(campos[i]["Token"].asString(), campos[i]["IDToken"].asString(), campos[i]["Simbolo"].asString());
+            tablaTokens.push_back(t);
         }
     }
     return tb;
@@ -83,47 +88,66 @@ vector<Registro> Tabla::getTablaSeparadores()
     return this->tablaSeparadores;
 }
 
+vector<Registro> Tabla::getTablaTokens()
+ {
+    return this->tablaTokens;    
+ }
+
 void Tabla::toString(vector<Registro> r)
 {
     TextTable t('-', '|', '+');
-    t.add("Nombre del simbolo");
-    t.add("Simbolo");
-    t.add("Tipos");
-    if (r.at(0).getCantidadSimbolos()!=0)
+    if (r.at(0).getToken().compare("") == 0)
     {
-        t.add("Cantidad de simbolos");
-        t.add("Posicion de cada simbolo(Linea-Columna)");
-        t.endOfRow();
-        for (int i = 0; i < r.size(); i++)
+        t.add("Simbolo");
+        t.add("Tipos");
+        if (r.at(0).getCantidadSimbolos() != 0)
         {
-            t.add(r.at(i).getNombre());
-            t.add(r.at(i).getSimbolo());
-            string tipo = "";
-            for (int j = 0; j < r.at(i).getTipo().size(); j++)
-            {
-                tipo += r.at(i).getTipo().at(j) + ", ";
-            }
-            t.add(tipo);
-            t.add(to_string(r.at(i).getCantidadSimbolos()));
-            t.add(r.at(i).getPosiciones());
+            t.add("Cantidad de simbolos");
+            t.add("Posicion de cada simbolo(Linea-Columna)");
             t.endOfRow();
+            for (int i = 0; i < r.size(); i++)
+            {
+                t.add(r.at(i).getSimbolo());
+                string tipo = "";
+                for (int j = 0; j < r.at(i).getTipo().size(); j++)
+                {
+                    tipo += r.at(i).getTipo().at(j) + ", ";
+                }
+                t.add(tipo);
+                t.add(to_string(r.at(i).getCantidadSimbolos()));
+                t.add(r.at(i).getPosiciones());
+                t.endOfRow();
+            }
+        }
+        else
+        {
+            t.endOfRow();
+            for (int i = 0; i < r.size(); i++)
+            {
+                t.add(r.at(i).getSimbolo());
+                string tipo = "";
+                for (int j = 0; j < r.at(i).getTipo().size(); j++)
+                {
+                    tipo += r.at(i).getTipo().at(j) + ", ";
+                }
+                t.add(tipo);
+                t.endOfRow();
+            }
         }
     }
     else
     {
+        t.add("Token");
+        t.add("ID Token");
+        t.add("Lexema");
         t.endOfRow();
         for (int i = 0; i < r.size(); i++)
         {
-            t.add(r.at(i).getNombre());
+            t.add(r.at(i).getToken());
+            t.add(r.at(i).getIDToken());
             t.add(r.at(i).getSimbolo());
-            string tipo = "";
-            for (int j = 0; j < r.at(i).getTipo().size(); j++)
-            {
-                tipo += r.at(i).getTipo().at(j) + ", ";
-            }
-            t.add(tipo);
             t.endOfRow();
-        }
+        }        
     }
     t.setAlignment(2, TextTable::Alignment::LEFT);
     std::cout << t << endl;

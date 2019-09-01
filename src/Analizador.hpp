@@ -12,17 +12,23 @@ private:
     vector<Registro> simbolos;
     vector<Registro> tablaSimbolos;
     vector<Registro> tablaSeparadores;
+    vector<Registro> tablaTokens;
+    vector<Registro> tokens;
 
 public:
     Analizador(string rutaSimbolos, string rutaCodigo);
     void identificarSimbolos(string rutaCodigo);
     bool esSeparador(char simbolo);
     bool yaExiste(string simbolo, string fila, string columna);
+    bool yaExisteToken(string lexema);
     void buscarAgregarSimbolo(string simbolo, string fila, string columna);
     void buscarAgregarSeparador(string simbolo, string fila, string columna);
+    void buscarAgregarToken(string lexema);
     vector<Registro> getSimbolos();
+    vector<Registro> getTokens();
     vector<Registro> getTablaSimbolos();
     vector<Registro> getTablaSeparadores();
+    vector<Registro> getTablaTokens();
 };
 
 Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
@@ -30,6 +36,7 @@ Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
     Tabla leerTabla(rutaSimbolos);
     tablaSeparadores = leerTabla.getTablaSeparadores();
     tablaSimbolos = leerTabla.getTablaSimbolos();
+    tablaTokens = leerTabla.getTablaTokens();
     identificarSimbolos(rutaCodigo);
 }
 
@@ -55,7 +62,7 @@ void Analizador::identificarSimbolos(string rutaCodigo)
                 {
                     columna = i + 1;
                     caracter = cadena.at(i);
-                    buscarAgregarSimbolo(simbolo, to_string(fila), to_string(columna-simbolo.size()));
+                    buscarAgregarSimbolo(simbolo, to_string(fila), to_string(columna - simbolo.size()));
                     buscarAgregarSeparador(caracter, to_string(fila), to_string(columna));
                     caracter = "";
                     simbolo = "";
@@ -80,15 +87,18 @@ void Analizador::buscarAgregarSimbolo(string simbolo, string fila, string column
             Registro r = tablaSimbolos.at(i);
             simbolos.push_back(r);
             simbolos.back().setNuevaPosicion(fila, columna);
+            buscarAgregarToken(simbolo);
         }
         else
         {
             vector<string> v;
             v.push_back("Identificador");
             v.push_back("Variable");
-            Registro r("Variable", simbolo, v);
+            Registro r(simbolo, v);
             simbolos.push_back(r);
             simbolos.back().setNuevaPosicion(fila, columna);
+            Registro t("Identificador variable", "36", simbolo);
+            tokens.push_back(t);
         }
     }
 }
@@ -106,13 +116,30 @@ void Analizador::buscarAgregarSeparador(string simbolo, string fila, string colu
             Registro r = tablaSeparadores.at(i);
             simbolos.push_back(r);
             simbolos.back().setNuevaPosicion(fila, columna);
+            buscarAgregarToken(simbolo);
         }
+    }
+}
+
+void Analizador::buscarAgregarToken(string lexema)
+{
+    int i = 0;
+    while (i<tablaTokens.size()&&tablaTokens.at(i).getSimbolo().compare(lexema) != 0)
+        i++;
+    if(i<tablaTokens.size()){
+        Registro t = tablaTokens.at(i);
+        tokens.push_back(t);
     }
 }
 
 vector<Registro> Analizador::getSimbolos()
 {
     return this->simbolos;
+}
+
+vector<Registro> Analizador::getTokens()
+{
+    return this->tokens;
 }
 
 vector<Registro> Analizador::getTablaSimbolos()
@@ -123,6 +150,11 @@ vector<Registro> Analizador::getTablaSimbolos()
 vector<Registro> Analizador::getTablaSeparadores()
 {
     return this->tablaSeparadores;
+}
+
+vector<Registro> Analizador::getTablaTokens()
+{
+    return this->tablaTokens;
 }
 
 bool Analizador::esSeparador(char simbolo)
@@ -147,6 +179,19 @@ bool Analizador::yaExiste(string simbolo, string fila, string columna)
             existe = true;
             simbolos.at(i).setNuevaPosicion(fila, columna);
         }
+        else
+            i++;
+    return existe;
+}
+
+bool Analizador::yaExisteToken(string lexema)
+{
+    bool existe = false;
+    int i = 0;
+    while (i < tokens.size() && !existe)
+        if (tokens.at(i).getSimbolo().compare(lexema) == 0)
+            existe = true;
+            // tokens.at(i).setNuevaPosicion(fila, columna);
         else
             i++;
     return existe;
