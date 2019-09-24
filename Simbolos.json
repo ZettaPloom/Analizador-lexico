@@ -332,7 +332,6 @@
             "Tipo":[
                 "Token",
                 "Separador",
-                "Operador",
                 "Expresion"
             ],
             "EsSeparador":true
@@ -364,25 +363,6 @@
             "Tipo":[
                 "Tipo dato",
                 "Palabra reservada"
-            ],
-            "EsSeparador":false
-        },
-        {
-            "Token":"Tipo datoggggg",
-            "IDToken":"37",
-            "Simbolo":"martha",
-            "Tipo":[
-
-            ],
-            "EsSeparador":false
-
-        },
-        {
-            "Token":"Tipo datoeeeee",
-            "Simbolo":"jhon",
-            "IDToken":"38",
-            "Tipo":[
-
             ],
             "EsSeparador":false
         }
