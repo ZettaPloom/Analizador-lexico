@@ -18,8 +18,11 @@ Para correr este programa instalar la libreria libjsoncpp-dev
 En Linux: sudo apt-get install libjsoncpp-dev
 Y agregar el siguiente parametro de compilacion en gcc: -ljsoncpp
 ****************************************************************** */
+#include <iostream>
 #include "Tabla.hpp"
 #include "Analizador.hpp"
+#include "Gramatica.hpp"
+using namespace std;
 
 int main()
 {
@@ -29,6 +32,7 @@ int main()
     cout << "\nPor favor ingrese la ruta del archivo que contiene el código" << endl;
     cin >> rutaCodigo;
     Analizador an(rutaSimbolos, rutaCodigo);
+    Gramatica* g;
     int opciones;
 etiqueta:
     cout << "\nPresione 1 para imprimir la tabla de simbolos" << endl
@@ -36,6 +40,7 @@ etiqueta:
          << "Presione 3 para imprimir la tabla de tokens" << endl
          << "Presione 4 para imprimir la tabla de simbolos generada" << endl
          << "Presione 5 para imprimir la tabla de tokens generada" << endl
+         << "Presione 6 para obtener y analizar la primera expresión aritmética" << endl
          << "Presione cualquier otro número para salir" << endl;
     cin >> opciones;
     cout << endl;
@@ -61,6 +66,16 @@ etiqueta:
         Tabla::toString(an.getTokens());
         goto etiqueta;
         break;
+    case 6:
+        g = new Gramatica("(8+9-7)+6)");
+        // cout<<"La expresión "<<g.getCadenaEntrada();
+        // if(g.isAceptada())
+        // {
+        //     cout<<" es aceptada"<<endl;
+        // } else
+        // {
+        //     cout<<" no es aceptada"<<endl;
+        // }
     default:
         break;
     }
