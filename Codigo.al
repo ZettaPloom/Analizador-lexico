@@ -1,8 +1,10 @@
 Algoritmo;
-martha jhon;
-jorge+jhon;
-definir a como cadena;
-definir b como cadena;
+definir a como real;
+definir b como real;
 leer a;
+leer b;
+definir c como real;
+c=a+b;
 escribir a;
+a=(a+b)/5*3%2;
 finAlgoritmo;

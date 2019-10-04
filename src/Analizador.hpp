@@ -5,6 +5,7 @@
 #include <string>
 #include "Registro.hpp"
 #include "Tabla.hpp"
+#include "Gramatica.hpp"
 
 class Analizador
 {
@@ -14,6 +15,7 @@ private:
     vector<Registro> tablaSeparadores;
     vector<Registro> tablaTokens;
     vector<Registro> tokens;
+    string rutaCodigoAux;
 
 public:
     Analizador(string rutaSimbolos, string rutaCodigo);
@@ -29,6 +31,7 @@ public:
     vector<Registro> getTablaSimbolos();
     vector<Registro> getTablaSeparadores();
     vector<Registro> getTablaTokens();
+    void AnalizarExpsAritmeticas();
 };
 
 Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
@@ -38,13 +41,60 @@ Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
     tablaSimbolos = leerTabla.getTablaSimbolos();
     tablaTokens = leerTabla.getTablaTokens();
     identificarSimbolos(rutaCodigo);
+    this->rutaCodigoAux = rutaCodigo;
+}
+
+void Analizador::AnalizarExpsAritmeticas()
+{
+    ifstream archivo(rutaCodigoAux);
+    if (archivo.fail())
+        cout << "Error al abrir el archivo de código" << endl;
+    else
+    {
+        string cadena;
+        string cadenaAnalizar;
+        bool lineaCompleta = true;
+        Gramatica* g;
+        while (!archivo.eof())
+        {
+            getline(archivo, cadena);
+            for (int i = 0; i < cadena.size(); i++)
+            {
+                if (cadena.at(i) == '+' || cadena.at(i) == '-' || cadena.at(i) == '*'
+                 || cadena.at(i) == '/' || cadena.at(i) == '%')
+                {
+                    for (int j = 0; j < cadena.size(); j++)
+                    {
+                        if(cadena.at(j) == '=')
+                        {
+                            for (int k = j + 1; k < cadena.size() - 1; k++)
+                            {
+                                lineaCompleta = false;
+                                cadenaAnalizar+= cadena.at(k);
+                            }
+                        }
+                    }
+                    if (lineaCompleta)
+                    {
+                        cadenaAnalizar = cadena;
+                    }
+                }
+            }
+            if(!cadenaAnalizar.empty())
+            {
+                g = new Gramatica(cadenaAnalizar);
+                cadenaAnalizar.clear();
+                cout << endl;
+            }
+        }
+    }
 }
 
 void Analizador::identificarSimbolos(string rutaCodigo)
 {
     ifstream archivo(rutaCodigo);
     if (archivo.fail())
-        cout << "Error al abrir el archivo de código";
+        cout << "Error al abrir el archivo de código" << endl;
     else
     {
         string cadena;
@@ -69,7 +119,7 @@ void Analizador::identificarSimbolos(string rutaCodigo)
                 }
                 else
                     simbolo += cadena.at(i);
-            }
+            }            
         }
         archivo.close();
     }

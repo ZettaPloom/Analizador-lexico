@@ -21,7 +21,6 @@ Y agregar el siguiente parametro de compilacion en gcc: -ljsoncpp
 #include <iostream>
 #include "Tabla.hpp"
 #include "Analizador.hpp"
-#include "Gramatica.hpp"
 using namespace std;
 
 int main()
@@ -67,15 +66,7 @@ etiqueta:
         goto etiqueta;
         break;
     case 6:
-        g = new Gramatica("(8+9-7)+6)");
-        // cout<<"La expresión "<<g.getCadenaEntrada();
-        // if(g.isAceptada())
-        // {
-        //     cout<<" es aceptada"<<endl;
-        // } else
-        // {
-        //     cout<<" no es aceptada"<<endl;
-        // }
+        an.AnalizarExpsAritmeticas();
     default:
         break;
     }
