@@ -76,7 +76,10 @@ void Analizador::AnalizarExpsAritmeticas()
                     }
                     if (lineaCompleta)
                     {
-                        cadenaAnalizar = cadena;
+                        for (int i = 0; i < cadena.size() - 1; i++)
+                        {
+                            cadenaAnalizar+=cadena.at(i);
+                        }
                     }
                 }
             }

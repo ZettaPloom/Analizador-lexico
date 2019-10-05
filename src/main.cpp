@@ -67,6 +67,8 @@ etiqueta:
         break;
     case 6:
         an.AnalizarExpsAritmeticas();
+        goto etiqueta;
+        break;
     default:
         break;
     }

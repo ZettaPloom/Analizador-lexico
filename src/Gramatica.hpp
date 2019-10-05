@@ -62,10 +62,6 @@ public:
             cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch(tokenEntrada);
         }
-        else
-        {
-            PresentarError();
-        }
     }
 
     void Digit()
@@ -74,10 +70,6 @@ public:
         {
             cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch(tokenEntrada);
-        }
-        else
-        {
-            PresentarError();
         }
     }
 
@@ -93,7 +85,7 @@ public:
         {
             Letra();
             IdentificadorPrima();
-        }        
+        }
     }
 
     void Numeros()
@@ -157,6 +149,8 @@ public:
         {
             cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('%');
+            Factor();
+            TerminoPrima();
         }
     }
 
@@ -181,11 +175,11 @@ public:
             HacerMatch('-');
             Termino();
             ExpresionPrima();
-        }
+        }        
     }
 
     void PresentarError()
     {
-        cout << "Error en token: "+tokenEntrada;
+        cout << "Error en token: "+ tokenEntrada << endl;
     }
 };
