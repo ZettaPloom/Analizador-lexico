@@ -47,8 +47,9 @@ Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
 void Analizador::AnalizarExpsAritmeticas()
 {
     ifstream archivo(rutaCodigoAux);
-    if (archivo.fail())
+    if (archivo.fail()){
         cout << "Error al abrir el archivo de código" << endl;
+    }
     else
     {
         string cadena;
@@ -76,10 +77,7 @@ void Analizador::AnalizarExpsAritmeticas()
                     }
                     if (lineaCompleta)
                     {
-                        for (int i = 0; i < cadena.size() - 1; i++)
-                        {
-                            cadenaAnalizar+=cadena.at(i);
-                        }
+                        cadenaAnalizar = cadena;
                     }
                 }
             }
@@ -91,6 +89,7 @@ void Analizador::AnalizarExpsAritmeticas()
             }
         }
     }
+    archivo.close();
 }
 
 void Analizador::identificarSimbolos(string rutaCodigo)

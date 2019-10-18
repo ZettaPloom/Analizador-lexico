@@ -71,6 +71,11 @@ public:
             cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch(tokenEntrada);
         }
+        else
+        {
+            PresentarError();
+        }
+        
     }
 
     void Identificador()
@@ -175,11 +180,15 @@ public:
             HacerMatch('-');
             Termino();
             ExpresionPrima();
-        }        
+        }
+        else
+        {
+            PresentarError();
+        }
     }
 
     void PresentarError()
     {
-        cout << "Error en token: "+ tokenEntrada << endl;
+        cout << "Error en token: " + tokenEntrada << endl;
     }
 };
