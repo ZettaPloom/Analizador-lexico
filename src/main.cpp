@@ -25,12 +25,13 @@ using namespace std;
 
 int main()
 {
-    string rutaSimbolos, rutaCodigo;
-    cout << "\nPor favor ingrese la ruta del archivo JSON de la tabla de simbolos" << endl;
-    cin >> rutaSimbolos;
-    cout << "\nPor favor ingrese la ruta del archivo que contiene el código" << endl;
-    cin >> rutaCodigo;
-    Analizador an(rutaSimbolos, rutaCodigo);
+    // string rutaSimbolos, rutaCodigo;
+    // cout << "\nPor favor ingrese la ruta del archivo JSON de la tabla de simbolos" << endl;
+    // cin >> rutaSimbolos;
+    // cout << "\nPor favor ingrese la ruta del archivo que contiene el código" << endl;
+    // cin >> rutaCodigo;
+    // Analizador an(rutaSimbolos, rutaCodigo);
+    Analizador an("Simbolos.json", "Codigo.al");
     Gramatica* g;
     int opciones;
 etiqueta:
@@ -40,6 +41,8 @@ etiqueta:
          << "Presione 4 para imprimir la tabla de simbolos generada" << endl
          << "Presione 5 para imprimir la tabla de tokens generada" << endl
          << "Presione 6 para obtener y analizar la primera expresión aritmética" << endl
+         << "Presione 7 para obtener el PreOrden de la primera expresión aritmética" << endl
+         << "Presione 8 para obtener el PosOrden de la primera expresión aritmética" << endl
          << "Presione cualquier otro número para salir" << endl;
     cin >> opciones;
     cout << endl;
@@ -67,6 +70,14 @@ etiqueta:
         break;
     case 6:
         an.AnalizarExpsAritmeticas();
+        goto etiqueta;
+        break;
+    case 7:
+        cout << an.getPreOrden() << endl;
+        goto etiqueta;
+        break;
+    case 8:
+        cout << an.getPosOrden() << endl;
         goto etiqueta;
         break;
     default:

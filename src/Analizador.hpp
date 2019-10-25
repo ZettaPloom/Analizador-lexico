@@ -16,6 +16,8 @@ private:
     vector<Registro> tablaTokens;
     vector<Registro> tokens;
     string rutaCodigoAux;
+    string preOrden;
+    string posOrden;
 
 public:
     Analizador(string rutaSimbolos, string rutaCodigo);
@@ -32,6 +34,14 @@ public:
     vector<Registro> getTablaSeparadores();
     vector<Registro> getTablaTokens();
     void AnalizarExpsAritmeticas();
+    string getPreOrden()
+    {
+        return this->preOrden;
+    }
+    string getPosOrden()
+    {
+        return this->posOrden;
+    }
 };
 
 Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
@@ -47,45 +57,59 @@ Analizador::Analizador(string rutaSimbolos, string rutaCodigo)
 void Analizador::AnalizarExpsAritmeticas()
 {
     ifstream archivo(rutaCodigoAux);
-    if (archivo.fail()){
-        cout << "Error al abrir el archivo de código" << endl;
+    if (archivo.fail())
+    {
+        // cout << "Error al abrir el archivo de código" << endl;
     }
     else
     {
         string cadena;
         string cadenaAnalizar;
         bool lineaCompleta = true;
-        Gramatica* g;
-        while (!archivo.eof())
+        bool encontrada = false;
+        Gramatica *g;
+        while (!archivo.eof() && !encontrada)
         {
             getline(archivo, cadena);
-            for (int i = 0; i < cadena.size(); i++)
+            int i = 0;
+            while (i < cadena.size())
             {
-                if (cadena.at(i) == '+' || cadena.at(i) == '-' || cadena.at(i) == '*'
-                 || cadena.at(i) == '/' || cadena.at(i) == '%')
+                if (cadena.at(i) == '+' || cadena.at(i) == '-' || cadena.at(i) == '*' || cadena.at(i) == '/' || cadena.at(i) == '%')
                 {
-                    for (int j = 0; j < cadena.size(); j++)
+                    i = cadena.size();
+                    encontrada = true;
+                    int j = 0;
+                    while (j < cadena.size())
                     {
-                        if(cadena.at(j) == '=')
+                        if (cadena.at(j) == '=')
                         {
                             for (int k = j + 1; k < cadena.size() - 1; k++)
                             {
                                 lineaCompleta = false;
-                                cadenaAnalizar+= cadena.at(k);
+                                cadenaAnalizar += cadena.at(k);
                             }
                         }
-                    }
-                    if (lineaCompleta)
-                    {
-                        cadenaAnalizar = cadena;
+                        j++;
                     }
                 }
+                i++;
             }
-            if(!cadenaAnalizar.empty())
+        }
+        if (encontrada)
+        {
+            if (lineaCompleta)
+            {
+                for (int p = 0; p < cadena.size() - 1; p++)
+                {
+                    cadenaAnalizar += cadena.at(p);
+                }
+            }
+            if (!cadenaAnalizar.empty())
             {
                 g = new Gramatica(cadenaAnalizar);
                 cadenaAnalizar.clear();
-                cout << endl;
+                this->preOrden = g->getPreOrden();
+                this->posOrden = g->getPosOrden();
             }
         }
     }
@@ -96,7 +120,9 @@ void Analizador::identificarSimbolos(string rutaCodigo)
 {
     ifstream archivo(rutaCodigo);
     if (archivo.fail())
-        cout << "Error al abrir el archivo de código" << endl;
+    {
+        // cout << "Error al abrir el archivo de código" << endl;
+    }
     else
     {
         string cadena;
@@ -121,7 +147,7 @@ void Analizador::identificarSimbolos(string rutaCodigo)
                 }
                 else
                     simbolo += cadena.at(i);
-            }            
+            }
         }
         archivo.close();
     }
@@ -176,9 +202,10 @@ void Analizador::buscarAgregarSeparador(string simbolo, string fila, string colu
 void Analizador::buscarAgregarToken(string lexema)
 {
     int i = 0;
-    while (i<tablaTokens.size()&&tablaTokens.at(i).getSimbolo().compare(lexema) != 0)
+    while (i < tablaTokens.size() && tablaTokens.at(i).getSimbolo().compare(lexema) != 0)
         i++;
-    if(i<tablaTokens.size()){
+    if (i < tablaTokens.size())
+    {
         Registro t = tablaTokens.at(i);
         tokens.push_back(t);
     }
@@ -243,7 +270,7 @@ bool Analizador::yaExisteToken(string lexema)
     while (i < tokens.size() && !existe)
         if (tokens.at(i).getSimbolo().compare(lexema) == 0)
             existe = true;
-            // tokens.at(i).setNuevaPosicion(fila, columna);
+        // tokens.at(i).setNuevaPosicion(fila, columna);
         else
             i++;
     return existe;

@@ -9,6 +9,9 @@ private:
     string cadenaEntrada;
     char tokenEntrada;
     int posicion;
+    bool aceptada = true;
+    string preOrden;
+    string posOrden;
 
 public:
     string getCadenaEntrada()
@@ -22,6 +25,18 @@ public:
         posicion = 0;
         tokenEntrada = PrimerToken();
         Expresion();
+        if (aceptada)
+                cout << "La cadena: " << cadenaEntrada << " es aceptada por la gramática" << endl;
+    }
+
+    string getPreOrden()
+    {
+        return this->preOrden;
+    }
+
+    string getPosOrden()
+    {
+        return this->posOrden;
     }
 
     void HacerMatch(char t)
@@ -43,10 +58,6 @@ public:
             posicion++;
             return cadenaEntrada.at(posicion - 1);
         }
-        else
-        {
-            exit(0);
-        }
     }
 
     char PrimerToken()
@@ -59,7 +70,9 @@ public:
     {
         if (isalpha(tokenEntrada))
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
+            preOrden+=tokenEntrada;
+            posOrden+=tokenEntrada;
             HacerMatch(tokenEntrada);
         }
     }
@@ -68,12 +81,14 @@ public:
     {
         if (isdigit(tokenEntrada))
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
+            preOrden+=tokenEntrada;
+            posOrden+=tokenEntrada;
             HacerMatch(tokenEntrada);
         }
         else
         {
-            PresentarError();
+            //PresentarError();
         }
         
     }
@@ -90,7 +105,7 @@ public:
         {
             Letra();
             IdentificadorPrima();
-        }
+        }        
     }
 
     void Numeros()
@@ -112,19 +127,27 @@ public:
     {
         if (isdigit(tokenEntrada))
         {
+            // preOrden+=tokenEntrada;
             Numeros();
+            // posOrden+=tokenEntrada;
         }
         else if (isalpha(tokenEntrada))
         {
+            // preOrden+=tokenEntrada;
             Identificador();
+            // posOrden+=tokenEntrada;
         }
         else if (tokenEntrada == '(')
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('(');
+            preOrden+='(';
+            posOrden+='(';
             Expresion();
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch(')');
+            preOrden+=')';
+            posOrden+=')';
         }
     }
 
@@ -138,24 +161,31 @@ public:
     {
         if (tokenEntrada == '*')
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
+            
             HacerMatch('*');
             Factor();
+            preOrden+='*';
             TerminoPrima();
+            posOrden+='*';
         }
         else if (tokenEntrada == '/')
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('/');
             Factor();
+            preOrden+='/';
             TerminoPrima();
+            posOrden+='/';
         }
         else if (tokenEntrada == '%')
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('%');
             Factor();
+            preOrden+='%';
             TerminoPrima();
+            posOrden+='%';
         }
     }
 
@@ -169,26 +199,31 @@ public:
     {
         if (tokenEntrada == '+')
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('+');
             Termino();
+            preOrden+='+';
             ExpresionPrima();
+            posOrden+='+';
         }
         else if (tokenEntrada == '-')
         {
-            cout << "Analizando: " << tokenEntrada << endl;
+            //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('-');
             Termino();
+            preOrden+='-';
             ExpresionPrima();
+            posOrden+='-';
         }
         else
         {
-            PresentarError();
+            //PresentarError();
         }
     }
 
     void PresentarError()
     {
-        cout << "Error en token: " + tokenEntrada << endl;
+        aceptada = false;
+        cout << "La cadena: " << cadenaEntrada << " NO es aceptada por la gramática" << endl;
     }
 };
