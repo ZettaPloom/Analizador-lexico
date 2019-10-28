@@ -154,7 +154,7 @@ public:
     void Termino()
     {
         Factor();
-        TerminoPrima();
+        TerminoPrima();        
     }
 
     void TerminoPrima()
@@ -162,10 +162,8 @@ public:
         if (tokenEntrada == '*')
         {
             //cout << "Analizando: " << tokenEntrada << endl;
-            
             HacerMatch('*');
             Factor();
-            preOrden+='*';
             TerminoPrima();
             posOrden+='*';
         }
@@ -174,7 +172,6 @@ public:
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('/');
             Factor();
-            preOrden+='/';
             TerminoPrima();
             posOrden+='/';
         }
@@ -182,8 +179,8 @@ public:
         {
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('%');
-            Factor();
             preOrden+='%';
+            Factor();
             TerminoPrima();
             posOrden+='%';
         }
@@ -192,7 +189,7 @@ public:
     void Expresion()
     {
         Termino();
-        ExpresionPrima();
+        ExpresionPrima();        
     }
 
     void ExpresionPrima()
@@ -202,7 +199,6 @@ public:
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('+');
             Termino();
-            preOrden+='+';
             ExpresionPrima();
             posOrden+='+';
         }
@@ -211,7 +207,6 @@ public:
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('-');
             Termino();
-            preOrden+='-';
             ExpresionPrima();
             posOrden+='-';
         }
