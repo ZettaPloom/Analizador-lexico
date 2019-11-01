@@ -41,8 +41,8 @@ etiqueta:
          << "Presione 4 para imprimir la tabla de simbolos generada" << endl
          << "Presione 5 para imprimir la tabla de tokens generada" << endl
          << "Presione 6 para obtener y analizar la primera expresión aritmética" << endl
-         << "Presione 7 para obtener el PreOrden de la primera expresión aritmética" << endl
-         << "Presione 8 para obtener el PosOrden de la primera expresión aritmética" << endl
+         << "Presione 7 para obtener el PreOrden de la primera expresión aritmética si ya ha presionado 6, de lo contrario presione primero 6" << endl
+         << "Presione 8 para obtener el PosOrden de la primera expresión aritmética si ya ha presionado 6, de lo contrario presione primero 6" << endl
          << "Presione cualquier otro número para salir" << endl;
     cin >> opciones;
     cout << endl;

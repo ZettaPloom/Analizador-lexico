@@ -25,8 +25,8 @@ public:
         posicion = 0;
         tokenEntrada = PrimerToken();
         Expresion();
-        if (aceptada)
-                cout << "La cadena: " << cadenaEntrada << " es aceptada por la gramática" << endl;
+        if (aceptada && posicion == cadenaEntrada.size())
+            cout << "La cadena: " << cadenaEntrada << " es aceptada por la gramática" << endl;
     }
 
     string getPreOrden()
@@ -58,6 +58,7 @@ public:
             posicion++;
             return cadenaEntrada.at(posicion - 1);
         }
+        return 0;
     }
 
     char PrimerToken()
@@ -71,8 +72,9 @@ public:
         if (isalpha(tokenEntrada))
         {
             //cout << "Analizando: " << tokenEntrada << endl;
-            preOrden+=tokenEntrada;
-            posOrden+=tokenEntrada;
+            //cout << tokenEntrada << endl;
+            preOrden += tokenEntrada;
+            posOrden += tokenEntrada;
             HacerMatch(tokenEntrada);
         }
     }
@@ -82,15 +84,15 @@ public:
         if (isdigit(tokenEntrada))
         {
             //cout << "Analizando: " << tokenEntrada << endl;
-            preOrden+=tokenEntrada;
-            posOrden+=tokenEntrada;
+            //cout << tokenEntrada << endl;
+            preOrden += tokenEntrada;
+            posOrden += tokenEntrada;
             HacerMatch(tokenEntrada);
         }
         else
         {
             //PresentarError();
         }
-        
     }
 
     void Identificador()
@@ -105,7 +107,7 @@ public:
         {
             Letra();
             IdentificadorPrima();
-        }        
+        }
     }
 
     void Numeros()
@@ -141,20 +143,37 @@ public:
         {
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('(');
-            preOrden+='(';
-            posOrden+='(';
+            //cout << '(' << endl;
+            preOrden += '(';
+            posOrden += '(';
             Expresion();
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch(')');
-            preOrden+=')';
-            posOrden+=')';
+            //cout << ')' << endl;
+            preOrden += ')';
+            posOrden += ')';
         }
     }
 
     void Termino()
     {
+        if (cadenaEntrada.at(posicion) == '*')
+        {
+            //cout << '*' << endl;
+            preOrden += '*';
+        }
+        else if (cadenaEntrada.at(posicion) == '/')
+        {
+            //cout << '/' << endl;
+            preOrden += '/';
+        }
+        else if (cadenaEntrada.at(posicion) == '%')
+        {
+            //cout << '%' << endl;
+            preOrden += '%';
+        }
         Factor();
-        TerminoPrima();        
+        TerminoPrima();
     }
 
     void TerminoPrima()
@@ -165,7 +184,7 @@ public:
             HacerMatch('*');
             Factor();
             TerminoPrima();
-            posOrden+='*';
+            posOrden += '*';
         }
         else if (tokenEntrada == '/')
         {
@@ -173,23 +192,32 @@ public:
             HacerMatch('/');
             Factor();
             TerminoPrima();
-            posOrden+='/';
+            posOrden += '/';
         }
         else if (tokenEntrada == '%')
         {
             //cout << "Analizando: " << tokenEntrada << endl;
             HacerMatch('%');
-            preOrden+='%';
             Factor();
             TerminoPrima();
-            posOrden+='%';
+            posOrden += '%';
         }
     }
 
     void Expresion()
     {
+        if (cadenaEntrada.at(posicion) == '+')
+        {
+            //cout << '+' << endl;
+            preOrden += '+';
+        }
+        else if (cadenaEntrada.at(posicion) == '-')
+        {
+            //cout << '-' << endl;
+            preOrden += '-';
+        }
         Termino();
-        ExpresionPrima();        
+        ExpresionPrima();
     }
 
     void ExpresionPrima()
@@ -200,7 +228,7 @@ public:
             HacerMatch('+');
             Termino();
             ExpresionPrima();
-            posOrden+='+';
+            posOrden += '+';
         }
         else if (tokenEntrada == '-')
         {
@@ -208,7 +236,7 @@ public:
             HacerMatch('-');
             Termino();
             ExpresionPrima();
-            posOrden+='-';
+            posOrden += '-';
         }
         else
         {
